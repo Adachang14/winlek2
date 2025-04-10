@@ -5,6 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>วินเลข</title>
   <style>
+    .top-right {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
     body {
       font-family: 'Sarabun', sans-serif;
       background: #e0f7fa;
@@ -57,12 +63,20 @@
 </head>
 <body>
   <div class="container">
+    <!-- ปุ่มลอยขวาบน -->
+  <div class="top-right">
+    <button onclick="window.location.href='index2.html'">ชุดเลขต่างๆ</button>
+  </div>
     <h3>โปรแกรมวินเลขจากหน้าไปหลัง<br>ป้อนเลขที่ต้องการวิน อย่างน้อย 3 ตัว</h3>
     <input type="text" id="input" placeholder="กรอกเลข เช่น 12546" maxlength="10" onkeypress="checkEnter(event)" />
     <div>
       <button onclick="win()">วินเลข</button>
       <button onclick="clearAll()">เริ่มใหม่</button>
     </div>
+    <br>
+<a href="index3.html">
+  <button type="button" class="blue-button">ลากเลข</button>
+</a>
     <div id="results"></div>
   </div>
 
@@ -119,7 +133,11 @@
     }
 
     function win() {
-      const input = document.getElementById("input").value.trim();
+     let input = document.getElementById("input").value.trim();
+
+  // 🧼 ลบทุกอย่างที่ไม่ใช่ตัวเลขออก
+      input = input.replace(/\D/g, '');
+
       const digits = input.split("");
 
       if (input.length < 3 || digits.length > 10) {
@@ -189,6 +207,9 @@
         win();
       }
     }
+      document.getElementById("input").addEventListener("input", function () {
+        this.value = this.value.replace(/\D/g, '');
+      });
   </script>
 </body>
 </html>
